@@ -7,6 +7,7 @@ ul#timer {
   margin: 0;
   padding: 0;
   list-style: none;
+  overflow: hidden;
 }
 #timer .total, 
 #timer .rounded, 
@@ -14,8 +15,12 @@ ul#timer {
 #timer .elapsed, 
 #timer .started {
   display: none;
-  float: left;
-  margin-right: 20px;
+  float: right;
+  position: relative;
+  background: white;
+}
+#timer li span {
+  padding: 5px 10px 5px 0;
 }
 #timer .button {
   margin-bottom: 10px;
@@ -24,10 +29,11 @@ ul#timer {
   font-weight: bold;
   text-decoration: none;
   display: block;
-  padding: 10px 20px;
+  padding: 8px 10px;
   display: block;
-  font-size: 26px;
+  font-size: 16px;
   text-align: center;
+  float: right;
   -webkit-border-radius: 5px;
 }
 #timer .start {

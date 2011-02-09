@@ -40,12 +40,12 @@ function formatDiff() {
   min = Math.floor(diff/60); 
   hr = Math.floor(diff/60/60); 
 
-  out = sec+" sec";
+  out = sec+"&nbsp;sec";
   if (min > 0) {
-    out = min%60+" min "+out;
+    out = min%60+"&nbsp;min&nbsp;"+out;
   }
   if (hr > 0) {
-   out = hr+" hr "+out;
+   out = hr+"&nbsp;hr&nbsp;"+out;
   }
   
   return out;
@@ -61,28 +61,48 @@ $(document).ready(function() {
   var previousTime = localStorage['previousTime'];
   var active = is_active();
   var timer_id = localStorage['timer_id'];
+  var $info = $('#timer .started, #timer .total, #timer .rounded, #timer .previous');
   
   if (debug) console.log("Init Active: " + active);
   
   // If you reload the page
   if (active) {    
     $("#timer .button a").attr('class', 'stop').text('Stop Time');
-    $('#timer .started span').html(formattedTime(startTime)).parent().show(); 
-    $('#timer .elapsed').show();
+    $('#timer .started span').html(formattedTime(startTime)); 
     
+    $info.stop(true, true).animate({width: 'easeOutExpo'}, 500);
+        
     // Start counting
     liveTime();
     
     // Use this to clear the timeout later
     localStorage['timer_id'] = setInterval(liveTime, 1000);
+    $('#timer .elapsed').stop(true, true).animate({width: ['toggle', 'easeOutExpo']}, 500);
     
     if (debug) console.log("Reload: YES");
     if (debug) console.log("ID: " + localStorage['timer_id']);
+    
   } else {
     // show previous time
-    $('#timer .previous span').html(previousTime).parent().show();
+    $('#timer .previous span').html(previousTime);
+    $('#timer .previous').animate({width: ['toggle', 'easeOutExpo']}, 500);
   }
-   
+  
+  //Show some info on hover
+  $('#timer .elapsed').hover(function() {
+    if (active) {
+      $('#timer .started').stop(true, true).animate({
+        width: ['toggle', 'easeOutExpo']
+        }, 500); 
+    }
+  }, function() {
+    if (active) {
+      $('#timer .started').stop(true, true).animate({
+        width: ['toggle', 'easeOutExpo']
+        }, 500);
+    }
+  });
+  
   // If you click the button
   $('#timer .button a').click(function() {
     var epoch = time();
@@ -94,16 +114,24 @@ $(document).ready(function() {
       
       // Set current time
       localStorage['startTime'] = epoch;
-      $('#timer .started span').html(human_time).parent().fadeIn('fast');
-      $('#timer .total').hide();
-      $('#timer .rounded').hide();
-      $('#timer .previous').hide();
-      
-      $('#timer .elapsed').fadeIn('fast');
-      
+      $('#timer .started span').html(human_time);
+
+      // Hide extras
+      if ($('#timer .previous').is(':visible') && $info.is(':hidden')) {
+        $('#timer .previous').hide(); 
+      }
+      if ($info.is(':visible')) {
+        $info.stop(true, true).animate({width: ['toggle', 'easeOutExpo']}, 500);
+      }
+        
       // Keep counting
       liveTime();
       localStorage['timer_id'] = setInterval(liveTime, 1000);
+      
+      if ($('#timer .elapsed').is(':hidden')) {
+        $('#timer .elapsed').stop(true, true).animate({width: ['toggle', 'easeOutExpo']}, 500);
+      }
+      
       active = true;
       
       if (debug) console.log("Active: " + active);
@@ -117,15 +145,16 @@ $(document).ready(function() {
       
       // Do styling
       $("#timer .button a").attr('class', 'start').text('Start Time');
+      $('#timer .elapsed').animate({width: 'easeOutExpo'}, 500);
       
-      // Set total
-      $('#timer .total span').html(total).parent().fadeIn('fast');
-      
-      // Set rounding (in minutes)
-      $('#imer .rounded span').html(round_me(15, diff/60)).parent().fadeIn('fast');
+      $('#timer .total span').html(total);
+      $('#timer .rounded span').html(round_me(15, diff/60));
       
       // Set previous time
-      $('#timer .previous span').html(previousTime).parent().fadeIn('fast');
+      $('#timer .previous span').html(previousTime);
+      $('#timer .previous').hide();
+      
+      $info.stop(true, true).animate({width: ['toggle', 'easeOutExpo']}, 500);
       
       if (total != "0.00") {
         localStorage['previousTime'] = total;
@@ -145,6 +174,4 @@ $(document).ready(function() {
     }
     return false;
   });
-  
-  
 });
