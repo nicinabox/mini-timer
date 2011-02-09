@@ -1,0 +1,55 @@
+body {
+  margin: 0;
+  font-family: "helvetica neue", helvetica, arial, sans-serif;
+}
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+ul#info li {
+  float: left;
+  margin-left: 20px;
+}
+#theButton {
+  font-weight: bold;
+  text-decoration: none;
+  display: block;
+  padding: 10px 20px;
+  display: block;
+  font-size: 26px;
+  margin: 20px;
+  text-align: center;
+  -webkit-border-radius: 5px;
+}
+.start {
+  color: white;
+  background: #99cc33;
+}
+.start:hover {
+  background: #8fbe30;
+}
+.stop {
+  color: white;
+  background: #E51837;
+}
+.stop:hover {
+  background: #c61530;
+}
+
+#info {
+  overflow: auto;
+}
+#info strong {
+  color: silver;
+}
+#info li {
+  display: none;
+}
+
+
+
+
+#total, #rounded, #previous, #elapsed, #started {
+  display: none;
+}
