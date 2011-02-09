@@ -1,55 +1,46 @@
+/* Author: Nic Aitch */
 body {
-  margin: 0;
+  margin: 20px;
   font-family: "helvetica neue", helvetica, arial, sans-serif;
 }
-ul {
+ul#timer {
   margin: 0;
   padding: 0;
   list-style: none;
 }
-ul#info li {
+#timer .total, 
+#timer .rounded, 
+#timer .previous, 
+#timer .elapsed, 
+#timer .started {
+  display: none;
   float: left;
-  margin-left: 20px;
+  margin-right: 20px;
 }
-#theButton {
+#timer .button {
+  margin-bottom: 10px;
+}
+#timer .button a {
   font-weight: bold;
   text-decoration: none;
   display: block;
   padding: 10px 20px;
   display: block;
   font-size: 26px;
-  margin: 20px;
   text-align: center;
   -webkit-border-radius: 5px;
 }
-.start {
+#timer .start {
   color: white;
   background: #99cc33;
 }
-.start:hover {
+#timer .start:hover {
   background: #8fbe30;
 }
-.stop {
+#timer .stop {
   color: white;
   background: #E51837;
 }
-.stop:hover {
+#timer .stop:hover {
   background: #c61530;
-}
-
-#info {
-  overflow: auto;
-}
-#info strong {
-  color: silver;
-}
-#info li {
-  display: none;
-}
-
-
-
-
-#total, #rounded, #previous, #elapsed, #started {
-  display: none;
 }

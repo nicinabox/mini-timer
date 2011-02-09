@@ -23,7 +23,7 @@ function time() {
   return Math.round(new Date().getTime() / 1000);
 }
 function liveTime() {
-  $('#elapsed span').html(formatDiff());
+  $('#timer .elapsed span').html(formatDiff());
 }
 function totalTime(diff) {
   return (diff/60/60).toFixed(2);
@@ -56,7 +56,7 @@ round_me = function(amt, total) {
 
 $(document).ready(function() {
   // Set vars
-  var debug = true;
+  var debug = false;
   var startTime = localStorage['startTime'];
   var previousTime = localStorage['previousTime'];
   var active = is_active();
@@ -66,9 +66,9 @@ $(document).ready(function() {
   
   // If you reload the page
   if (active) {    
-    $("#button a").attr('class', 'stop').text('Stop Time');
-    $('#started span').html(formattedTime(startTime)).parent().show(); 
-    $('#elapsed').show();
+    $("#timer .button a").attr('class', 'stop').text('Stop Time');
+    $('#timer .started span').html(formattedTime(startTime)).parent().show(); 
+    $('#timer .elapsed').show();
     
     // Start counting
     liveTime();
@@ -78,30 +78,28 @@ $(document).ready(function() {
     
     if (debug) console.log("Reload: YES");
     if (debug) console.log("ID: " + localStorage['timer_id']);
-  }
-  
-  // Set Previous time
-  if (previousTime) {
-    $('#previous span').html(previousTime).parent().show();
+  } else {
+    // show previous time
+    $('#timer .previous span').html(previousTime).parent().show();
   }
    
   // If you click the button
-  $('#button a').click(function() {
+  $('#timer .button a').click(function() {
     var epoch = time();
     var human_time = formattedTime(epoch);
     
     if (!active) { // START
       // Do styling
-      $("#button a").attr('class', 'stop').text('Stop Time');
+      $("#timer .button a").attr('class', 'stop').text('Stop Time');
       
       // Set current time
       localStorage['startTime'] = epoch;
-      $('#started span').html(human_time).parent().fadeIn('fast');
-      $('#total').hide();
-      $('#rounded').hide();
-      $('#previous').hide();
+      $('#timer .started span').html(human_time).parent().fadeIn('fast');
+      $('#timer .total').hide();
+      $('#timer .rounded').hide();
+      $('#timer .previous').hide();
       
-      $('#elapsed').fadeIn('fast');
+      $('#timer .elapsed').fadeIn('fast');
       
       // Keep counting
       liveTime();
@@ -118,16 +116,16 @@ $(document).ready(function() {
       var timer_id = localStorage['previousTime'];
       
       // Do styling
-      $("#button a").attr('class', 'start').text('Start Time');
+      $("#timer .button a").attr('class', 'start').text('Start Time');
       
       // Set total
-      $('#total span').html(total).parent().fadeIn('fast');
+      $('#timer .total span').html(total).parent().fadeIn('fast');
       
       // Set rounding (in minutes)
-      $('#rounded span').html(round_me(15, diff/60)).parent().fadeIn('fast');
+      $('#imer .rounded span').html(round_me(15, diff/60)).parent().fadeIn('fast');
       
       // Set previous time
-      $('#previous span').html(previousTime).parent().fadeIn('fast');
+      $('#timer .previous span').html(previousTime).parent().fadeIn('fast');
       
       if (total != "0.00") {
         localStorage['previousTime'] = total;
