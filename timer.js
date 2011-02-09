@@ -51,7 +51,7 @@ function formatDiff() {
   return out;
 }
 round_me = function(amt, total) {
-  return total - (total % amt);
+  return (amt*Math.round(total/amt))/60;
 }
 
 $(document).ready(function() {
