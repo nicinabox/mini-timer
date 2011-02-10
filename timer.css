@@ -2,12 +2,19 @@
 body {
   margin: 20px;
   font-family: "helvetica neue", helvetica, arial, sans-serif;
+  line-height: 1em;
 }
 ul#timer {
   margin: 0;
   padding: 0;
   list-style: none;
   overflow: hidden;
+}
+#timer li {
+  padding: 8px;
+}
+#timer li span {
+  //padding: 5px 10px 5px 0;
 }
 #timer .total, 
 #timer .rounded, 
@@ -19,11 +26,19 @@ ul#timer {
   position: relative;
   background: white;
 }
-#timer li span {
-  padding: 5px 10px 5px 0;
+#timer .elapsed {
+  background: #dedede;
+  margin-right: -5px;
+  padding-right: 12px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
 }
 #timer .button {
   margin-bottom: 10px;
+  float: right;
+  padding: 0;
+  position: relative;
+  z-index: 3;
 }
 #timer .button a {
   font-weight: bold;
@@ -35,6 +50,7 @@ ul#timer {
   text-align: center;
   float: right;
   -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
 }
 #timer .start {
   color: white;

@@ -84,21 +84,26 @@ $(document).ready(function() {
     
   } else {
     // show previous time
-    $('#timer .previous span').html(previousTime);
-    $('#timer .previous').animate({width: ['toggle', 'easeOutExpo']}, 500);
+    if (previousTime){
+      $('#timer .previous span').html(previousTime);
+      $('#timer .previous').animate({width: ['toggle', 'easeOutExpo']}, 500);
+    }
   }
   
   //Show some info on hover
   $('#timer .elapsed').hover(function() {
     if (active) {
       $('#timer .started').stop(true, true).animate({
-        width: ['toggle', 'easeOutExpo']
+        width: ['toggle', 'easeOutExpo'],
+        'padding-right': 'toggle'
         }, 500); 
     }
   }, function() {
     if (active) {
       $('#timer .started').stop(true, true).animate({
-        width: ['toggle', 'easeOutExpo']
+        //width: ['toggle', 'easeOutExpo']
+        width: ['toggle', 'easeOutExpo'],
+        'padding-right': 'toggle'
         }, 500);
     }
   });
@@ -141,7 +146,8 @@ $(document).ready(function() {
     } else { // STOP
       var diff = getDiff();
       var total = totalTime(diff);
-      var timer_id = localStorage['previousTime'];
+      var timer_id = localStorage['timer_id'];
+      var previousTime = localStorage['previousTime'];
       
       // Do styling
       $("#timer .button a").attr('class', 'start').text('Start Time');
@@ -151,9 +157,10 @@ $(document).ready(function() {
       $('#timer .rounded span').html(round_me(15, diff/60));
       
       // Set previous time
-      $('#timer .previous span').html(previousTime);
-      $('#timer .previous').hide();
-      
+      if(previousTime) {
+        $('#timer .previous span').html(previousTime);
+        $('#timer .previous').hide();
+      }
       $info.stop(true, true).animate({width: ['toggle', 'easeOutExpo']}, 500);
       
       if (total != "0.00") {
