@@ -14,7 +14,7 @@ ul#timer {
   padding: 8px;
 }
 #timer li span {
-  //padding: 5px 10px 5px 0;
+  
 }
 #timer .total, 
 #timer .rounded, 
@@ -41,6 +41,7 @@ ul#timer {
   z-index: 3;
 }
 #timer .button a {
+  min-width: 80px;
   font-weight: bold;
   text-decoration: none;
   display: block;
@@ -55,6 +56,9 @@ ul#timer {
 #timer .start {
   color: white;
   background: #99cc33;
+  background: -webkit-gradient(linear, left top, left bottom, from(#99cc33), to(#8fbe30)); 
+  background: -moz-linear-gradient(top,  #99cc33,  #8fbe30);
+  text-shadow: 0 -1px 0 #709526;
 }
 #timer .start:hover {
   background: #8fbe30;
@@ -62,6 +66,9 @@ ul#timer {
 #timer .stop {
   color: white;
   background: #E51837;
+  background: -webkit-gradient(linear, left top, left bottom, from(#E51837), to(#c61530)); 
+  background: -moz-linear-gradient(top,  #E51837,  #c61530);
+  text-shadow: 0 -1px 0 #a81228;
 }
 #timer .stop:hover {
   background: #c61530;
